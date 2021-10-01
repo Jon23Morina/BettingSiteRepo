@@ -59,8 +59,15 @@ namespace BettingSite.Api {
 
         // DELETE api/<BettingController>/5
         [HttpDelete("{id}")]
-        public ActionResult Delete() {
-            return null;
+        public async Task<ActionResult<Bets>> Delete(Guid id) {
+            var bets = database.Bets.FirstOrDefault(i => i.Id == id);
+            if(bets == null) {
+                return NotFound();
+            }
+            database.Bets.Remove(bets);
+            await database.SaveChangesAsync();
+
+            return Ok();
         }
     }
 }
