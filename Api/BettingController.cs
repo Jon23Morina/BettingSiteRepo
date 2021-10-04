@@ -39,7 +39,7 @@ namespace BettingSite.Api {
             bet.LastUpdatedBet = null;
             var bets = database.Bets.Add(bet);
             await database.SaveChangesAsync();
-            return RedirectToAction("/swagger/index.html");
+            return Ok();
         }
 
         // PUT api/<BettingController>/5
